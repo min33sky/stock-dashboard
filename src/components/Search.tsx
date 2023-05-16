@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import  { useCallback, useState } from 'react';
 import { mockSearchResults } from '../constants/mock';
 import { XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import SearchResults from './SearchResults';

@@ -1,9 +1,4 @@
-interface Result {
-  description: string;
-  displaySymbol: string;
-  symbol: string;
-  type: string;
-}
+import {Result} from "../types/stock.ts";
 
 interface Props {
   results: Result[];

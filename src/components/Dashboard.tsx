@@ -1,6 +1,8 @@
-import { mockCompanyDetails } from '../constants/mock';
-import Card from './Card';
-import Header from './Header';
+import { mockCompanyDetails, mockStockQuote } from "../constants/mock";
+import Card from "./Card";
+import Header from "./Header";
+import Overview from "./Overview.tsx";
+import Details from "./Details.tsx";
 
 export default function Dashboard() {
   return (
@@ -11,14 +13,23 @@ export default function Dashboard() {
       <div className="col-span-1 row-span-1 flex items-center justify-start md:col-span-2 xl:col-span-3">
         <Header name={mockCompanyDetails.name} />
       </div>
+
       <div className="row-span-4 md:col-span-2">
         <Card>Chart</Card>
       </div>
+
       <div>
-        <Card>Overview</Card>
+        <Overview
+          symbol={mockCompanyDetails.ticker}
+          price={mockStockQuote.pc}
+          currency={mockCompanyDetails.currency}
+          change={mockStockQuote.d}
+          changePercent={mockStockQuote.dp}
+        />
       </div>
+
       <div className="row-span-2 xl:row-span-3">
-        <Card>Details</Card>
+        <Details details={mockCompanyDetails} />
       </div>
     </div>
   );
