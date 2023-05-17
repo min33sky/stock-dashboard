@@ -1,4 +1,4 @@
-import  { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { mockSearchResults } from '../constants/mock';
 import { XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import SearchResults from './SearchResults';
@@ -24,12 +24,12 @@ export default function Search() {
   return (
     <div
       ref={searchResultRef}
-      className="relative z-50 my-4 flex w-96 items-center rounded-md border-2 border-neutral-200 bg-white"
+      className="relative z-50 my-4 flex w-96 items-center rounded-md border-2 border-neutral-200 bg-white dark:border-gray-800 dark:bg-gray-900"
     >
       <input
         type="text"
         value={input}
-        className="w-full rounded-md px-4 py-2 focus:outline-none"
+        className="w-full rounded-md px-4 py-2 focus:outline-none dark:bg-gray-900"
         placeholder="Search stock..."
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => {

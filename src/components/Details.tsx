@@ -1,3 +1,4 @@
+import { useTheme } from '../contexts/ThemeContext.tsx';
 import { Details, DetailsListType } from '../types/stock.ts';
 import Card from './Card.tsx';
 import { useCallback } from 'react';
@@ -23,7 +24,7 @@ export default function Details({ details }: DetailsProps) {
 
   return (
     <Card>
-      <ul className="divide-y-1 custom-scrollbar flex h-full w-full flex-col justify-between overflow-y-scroll pr-1 xl:pr-0">
+      <ul className="divide-y-1 custom-scrollbar dark:custom-scrollbark-dark flex h-full w-full flex-col justify-between overflow-y-scroll pr-1 dark:divide-gray-800 xl:pr-0">
         {Object.keys(detailsList).map((item) => {
           return (
             <li
