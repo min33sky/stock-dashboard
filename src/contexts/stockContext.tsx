@@ -1,14 +1,14 @@
-import React from 'react';
-import { createContext, useCallback, useState } from 'react';
+import React from "react";
+import { createContext, useCallback, useState } from "react";
 
 interface StockContextState {
-  symbol: string;
-  changeSymbol: (symbol: string) => void;
+  stockSymbol: string;
+  changeStockSymbol: (symbol: string) => void;
 }
 
 const StockContext = createContext<StockContextState>({
-  symbol: '',
-  changeSymbol: () => null,
+  stockSymbol: "",
+  changeStockSymbol: () => null,
 });
 
 export default function StockContextProvider({
@@ -16,7 +16,7 @@ export default function StockContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [stockSymbol, setStockSymbol] = useState('FB');
+  const [stockSymbol, setStockSymbol] = useState("");
 
   const handleChangeSymbol = useCallback((symbol: string) => {
     setStockSymbol(symbol);
@@ -24,7 +24,10 @@ export default function StockContextProvider({
 
   return (
     <StockContext.Provider
-      value={{ symbol: stockSymbol, changeSymbol: handleChangeSymbol }}
+      value={{
+        stockSymbol: stockSymbol,
+        changeStockSymbol: handleChangeSymbol,
+      }}
     >
       {children}
     </StockContext.Provider>
@@ -35,7 +38,7 @@ export function useStock() {
   const context = React.useContext(StockContext);
 
   if (!context) {
-    throw new Error('Cannot find StockProvider');
+    throw new Error("Cannot find StockProvider");
   }
 
   return context;

@@ -1,10 +1,35 @@
-import { mockCompanyDetails, mockStockQuote } from "../constants/mock";
+import { mockCompanyDetails } from "../constants/mock";
 import Header from "./Header";
 import Overview from "./Overview.tsx";
 import Details from "./Details.tsx";
 import Chart from "./Chart.tsx";
+import { useStock } from "../contexts/stockContext.tsx";
+import { useQuery } from "@tanstack/react-query";
+import { fetchQuote, fetchStockDetails } from "../utils/api/stock-api.ts";
 
 export default function Dashboard() {
+  const { stockSymbol } = useStock();
+
+  const { data: stockDetails } = useQuery({
+    queryKey: ["stockDetails", stockSymbol],
+    queryFn: () => fetchStockDetails(stockSymbol),
+    select: (res) => res.data,
+    enabled: !!stockSymbol,
+    onSuccess: (data) => {
+      console.log("stockDetails: ", data);
+    },
+  });
+
+  const { data: quote } = useQuery({
+    queryKey: ["stockQuote", stockSymbol],
+    queryFn: () => fetchQuote(stockSymbol),
+    select: (res) => res.data,
+    enabled: !!stockSymbol,
+    onSuccess: (data) => {
+      console.log("stockQuote: ", data);
+    },
+  });
+
   return (
     <div
       className="grid-rows-8 md:grid-rows-7 grid h-screen auto-rows-fr grid-cols-1 gap-6 bg-neutral-100
@@ -21,16 +46,16 @@ export default function Dashboard() {
 
       <div>
         <Overview
-          symbol={mockCompanyDetails.ticker}
-          price={mockStockQuote.pc}
-          currency={mockCompanyDetails.currency}
-          change={mockStockQuote.d}
-          changePercent={mockStockQuote.dp}
+          symbol={stockSymbol}
+          price={quote?.pc}
+          currency={quote?.d}
+          change={quote?.dp}
+          changePercent={stockDetails?.currency}
         />
       </div>
 
       <div className="row-span-2 xl:row-span-3">
-        <Details details={mockCompanyDetails} />
+        <Details details={stockDetails} />
       </div>
     </div>
   );

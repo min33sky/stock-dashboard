@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SymbolSearchResult } from "../../types/stock.ts";
+import { Details, Quote, SymbolSearchResult } from "../../types/stock.ts";
 
 const fetcher = axios.create({
   baseURL: "https://finnhub.io/api/v1",
@@ -13,11 +13,11 @@ export function searchSymbol(query: string) {
 }
 
 export function fetchStockDetails(stockStymbol: string) {
-  return fetcher.get(`/stock/profile2?symbol=${stockStymbol}`);
+  return fetcher.get<Details>(`/stock/profile2?symbol=${stockStymbol}`);
 }
 
 export function fetchQuote(stockStymbol: string) {
-  return fetcher.get(`/quote?symbol=${stockStymbol}`);
+  return fetcher.get<Quote>(`/quote?symbol=${stockStymbol}`);
 }
 
 export function fetchHistoricalData({

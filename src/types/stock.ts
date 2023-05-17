@@ -10,6 +10,17 @@ export interface Result {
   type: string;
 }
 
+export interface Quote {
+  c: number;
+  h: number;
+  l: number;
+  o: number;
+  pc: number;
+  t: number;
+  d: number;
+  dp: number;
+}
+
 export interface Details {
   [key: string]: string | number;
   finnhubIndustry: string;
