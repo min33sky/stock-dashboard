@@ -1,5 +1,5 @@
 import { MoonIcon } from '@heroicons/react/24/solid';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from '../contexts/themeContext';
 import { useCallback } from 'react';
 
 export default function ThemeIcon() {

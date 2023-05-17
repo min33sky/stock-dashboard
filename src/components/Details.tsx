@@ -1,4 +1,4 @@
-import { useTheme } from '../contexts/ThemeContext.tsx';
+import { useTheme } from '../contexts/themeContext.tsx';
 import { Details, DetailsListType } from '../types/stock.ts';
 import Card from './Card.tsx';
 import { useCallback } from 'react';

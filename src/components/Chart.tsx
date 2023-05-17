@@ -13,7 +13,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { useTheme } from '../contexts/ThemeContext.tsx';
+import { useTheme } from '../contexts/themeContext.tsx';
 
 type FilterType = '1D' | '1W' | '1M' | '1Y';
 

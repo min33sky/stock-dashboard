@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Dashboard from './components/Dashboard';
-import { useTheme } from './contexts/ThemeContext';
+import { useTheme } from './contexts/themeContext';
 
 export default function App() {
   const { setTheme } = useTheme();
