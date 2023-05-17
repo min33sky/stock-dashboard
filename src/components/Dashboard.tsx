@@ -1,17 +1,10 @@
-import { mockCompanyDetails, mockStockQuote } from '../constants/mock';
-import Header from './Header';
-import Overview from './Overview.tsx';
-import Details from './Details.tsx';
-import Chart from './Chart.tsx';
-import { useEffect } from 'react';
-import { searchSymbol } from '../utils/api/stock-api.ts';
+import { mockCompanyDetails, mockStockQuote } from "../constants/mock";
+import Header from "./Header";
+import Overview from "./Overview.tsx";
+import Details from "./Details.tsx";
+import Chart from "./Chart.tsx";
 
 export default function Dashboard() {
-  useEffect(() => {
-    const res = searchSymbol('FB');
-    console.log('res: ', res);
-  }, []);
-
   return (
     <div
       className="grid-rows-8 md:grid-rows-7 grid h-screen auto-rows-fr grid-cols-1 gap-6 bg-neutral-100

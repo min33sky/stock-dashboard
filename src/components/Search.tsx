@@ -1,24 +1,40 @@
-import { useCallback, useState } from 'react';
-import { mockSearchResults } from '../constants/mock';
-import { XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import SearchResults from './SearchResults';
-import useOutsideClick from '../hooks/useOutsideClick';
+import { useCallback, useState } from "react";
+import { XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import SearchResults from "./SearchResults";
+import useOutsideClick from "../hooks/useOutsideClick";
+import { useQuery } from "@tanstack/react-query";
+import { searchSymbol } from "../utils/api/stock-api.ts";
+import { Result } from "../types/stock.ts";
 
 export default function Search() {
-  const [input, setInput] = useState('');
-  const [bestMatches, setBestMatches] = useState(mockSearchResults.result);
+  const [input, setInput] = useState("");
+  const [bestMatches, setBestMatches] = useState<Result[]>([]);
 
   // TODO:  외부 클릭 시 검색 결과를 닫는 로직 (닫는 로직 개선 필요??)
   const searchResultRef = useOutsideClick(() => setBestMatches([]));
 
+  useQuery({
+    queryKey: ["search", input],
+    queryFn: () => searchSymbol(input),
+    select: (res) => res.data,
+    onSuccess: (data) => {
+      console.log("result: ", data);
+      setBestMatches(data.result);
+    },
+    onError: (error) => {
+      console.log("error: ", error);
+    },
+    enabled: !!input,
+  });
+
   const clear = useCallback(() => {
-    setInput('');
+    setInput("");
     setBestMatches([]);
   }, []);
 
   const updateBestMatches = useCallback(() => {
     // 나중에 API 호출로 대체
-    setBestMatches(mockSearchResults.result);
+    // setBestMatches(mockSearchResults.result);
   }, []);
 
   return (
@@ -33,7 +49,7 @@ export default function Search() {
         placeholder="Search stock..."
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key === 'Enter') {
+          if (e.key === "Enter") {
             updateBestMatches();
           }
         }}

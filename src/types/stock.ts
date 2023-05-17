@@ -1,3 +1,8 @@
+export type SymbolSearchResult = {
+  count: number;
+  result: Result[];
+};
+
 export interface Result {
   description: string;
   displaySymbol: string;

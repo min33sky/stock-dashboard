@@ -1,7 +1,7 @@
 // https://finnhub.io/docs/api/symbol-search
-import { HistoricalData } from "../types/stock.ts";
+import { HistoricalData, SymbolSearchResult } from "../types/stock.ts";
 
-export const mockSearchResults = {
+export const mockSearchResults: SymbolSearchResult = {
   count: 4,
   result: [
     {
