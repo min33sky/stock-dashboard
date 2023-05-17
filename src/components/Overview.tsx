@@ -20,6 +20,7 @@ export default function Overview({
       <span className="absolute left-4 top-4 text-lg text-neutral-400 xl:text-xl 2xl:text-2xl">
         {symbol}
       </span>
+
       <div className="flex h-full w-full items-center justify-around">
         <span className="flex items-center text-lg xl:text-2xl 2xl:text-3xl">
           {price && (
@@ -31,6 +32,7 @@ export default function Overview({
             </>
           )}
         </span>
+
         <span
           className={`text-lg xl:text-xl 2xl:text-2xl ${
             change ? (change > 0 ? "text-lime-500" : "text-red-500") : ""

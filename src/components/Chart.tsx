@@ -32,13 +32,9 @@ export default function Chart() {
   const { stockSymbol } = useStock();
   const { theme } = useTheme();
 
-  const formatData = (historicalData: HistoricalData) => {
-    return historicalData.c.map((item, index) => ({
-      value: item.toFixed(2),
-      date: convertUnixTimestampToDate(data.t[index]),
-    }));
-  };
-
+  /**
+   * 필터에 따라 차트에 표시할 데이터의 기간을 설정한다.
+   */
   const getDateRange = useCallback(() => {
     const { days, weeks, months, years } = chartConfig[filter];
 
@@ -47,6 +43,7 @@ export default function Chart() {
 
     const startTimestampUnix = convertDateToUnixTimestamp(startDate);
     const endTimestampUnix = convertDateToUnixTimestamp(endDate);
+
     setStartTime(startTimestampUnix);
     setEndTime(endTimestampUnix);
   }, [filter]);
@@ -56,6 +53,9 @@ export default function Chart() {
     setResolution(chartConfig[filter].resolution);
   }, [filter, getDateRange]);
 
+  /**
+   * 차트에 표시할 데이터를 가져온다.
+   */
   const { data } = useQuery({
     queryKey: ["historicalData", stockSymbol, resolution, startTime, endTime],
     queryFn: () =>
@@ -67,26 +67,41 @@ export default function Chart() {
       }),
     select: (res) => res.data,
     enabled: !!stockSymbol && !!startTime && !!endTime,
+    keepPreviousData: true, //? 이전 데이터를 유지해야 차트 깜박임을 방지할 수 있다.
     onSuccess: (data) => {
       console.log("historical data: ", data);
     },
   });
 
+  /**
+   * 데이터를 차트에 표시하기 위해 포맷팅한다.
+   * @param historicalData
+   */
+  const formatData = useCallback(
+    (historicalData: HistoricalData) => {
+      return historicalData.c.map((item, index) => ({
+        value: item.toFixed(2),
+        date: convertUnixTimestampToDate(data?.t[index]),
+      }));
+    },
+    [data]
+  );
+
   return (
     <Card>
+      <ul className={`absolute right-2 top-2 z-40 flex bg-slate-300/10`}>
+        {Object.keys(chartConfig).map((item) => (
+          <li key={item}>
+            <ChartFilter
+              text={item}
+              active={filter === item}
+              onClick={() => setFilter(item as FilterType)}
+            />
+          </li>
+        ))}
+      </ul>
       {data && (
         <>
-          <ul className={`absolute right-2 top-2 z-40 flex bg-slate-300/10`}>
-            {Object.keys(chartConfig).map((item) => (
-              <li key={item}>
-                <ChartFilter
-                  text={item}
-                  active={filter === item}
-                  onClick={() => setFilter(item as FilterType)}
-                />
-              </li>
-            ))}
-          </ul>
           <ResponsiveContainer>
             <AreaChart data={formatData(data)}>
               <defs>

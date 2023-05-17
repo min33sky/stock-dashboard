@@ -14,9 +14,6 @@ export default function App() {
   const queryClient = new QueryClient({
     //? 전역에서 캐시를 관리할 수 있음
     queryCache: new QueryCache({
-      onSuccess: (query) => {
-        console.log("전역 캐시: ", query);
-      },
       onError: (error) => {
         console.log("전역 캐시 에러: ", error);
       },
