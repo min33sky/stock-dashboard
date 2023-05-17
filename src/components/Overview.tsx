@@ -1,4 +1,4 @@
-import Card from "./Card.tsx";
+import Card from './Card.tsx';
 
 interface OverviewProps {
   symbol: string;
@@ -21,7 +21,7 @@ export default function Overview({
         {symbol}
       </span>
       <div className="flex h-full w-full items-center justify-around">
-        <span className="flex items-center text-lg xl:text-3xl 2xl:text-4xl">
+        <span className="flex items-center text-lg xl:text-2xl 2xl:text-3xl">
           ${price}
           <span className="m-2 text-lg text-neutral-400 xl:text-2xl 2xl:text-3xl">
             {currency}
@@ -29,7 +29,7 @@ export default function Overview({
         </span>
         <span
           className={`text-lg xl:text-xl 2xl:text-2xl ${
-            change > 0 ? "text-lime-500" : "text-red-500"
+            change > 0 ? 'text-lime-500' : 'text-red-500'
           }`}
         >
           {change} <span>({changePercent}%)</span>

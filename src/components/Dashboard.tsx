@@ -1,9 +1,8 @@
-import { mockCompanyDetails, mockStockQuote } from "../constants/mock";
-import Card from "./Card";
-import Header from "./Header";
-import Overview from "./Overview.tsx";
-import Details from "./Details.tsx";
-import Chart from "./Chart.tsx";
+import { mockCompanyDetails, mockStockQuote } from '../constants/mock';
+import Header from './Header';
+import Overview from './Overview.tsx';
+import Details from './Details.tsx';
+import Chart from './Chart.tsx';
 
 export default function Dashboard() {
   return (
