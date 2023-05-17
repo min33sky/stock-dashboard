@@ -31,3 +31,25 @@ export type DetailsListType = {
   currency: string;
   exchange: string;
 };
+
+/**
+ * **CandleStock** Data Type
+ *
+ * @description
+ * - c: 종가
+ * - h: 고가
+ * - l: 저가
+ * - o: 시가
+ * - s: 응답 상태
+ * - t: 시간
+ * - v: 거래량
+ */
+export type HistoricalData = {
+  c: number[];
+  h: number[];
+  l: number[];
+  o: number[];
+  s: string;
+  t: number[];
+  v: number[];
+};

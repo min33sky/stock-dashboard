@@ -3,6 +3,7 @@ import Card from "./Card";
 import Header from "./Header";
 import Overview from "./Overview.tsx";
 import Details from "./Details.tsx";
+import Chart from "./Chart.tsx";
 
 export default function Dashboard() {
   return (
@@ -15,7 +16,7 @@ export default function Dashboard() {
       </div>
 
       <div className="row-span-4 md:col-span-2">
-        <Card>Chart</Card>
+        <Chart />
       </div>
 
       <div>

@@ -21,9 +21,9 @@ export default function Overview({
         {symbol}
       </span>
       <div className="flex h-full w-full items-center justify-around">
-        <span className="flex items-center text-lg xl:text-4xl 2xl:text-5xl">
+        <span className="flex items-center text-lg xl:text-3xl 2xl:text-4xl">
           ${price}
-          <span className="m-2 text-lg text-neutral-400 xl:text-xl 2xl:text-2xl">
+          <span className="m-2 text-lg text-neutral-400 xl:text-2xl 2xl:text-3xl">
             {currency}
           </span>
         </span>

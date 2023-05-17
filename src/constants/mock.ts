@@ -1,4 +1,6 @@
 // https://finnhub.io/docs/api/symbol-search
+import { HistoricalData } from "../types/stock.ts";
+
 export const mockSearchResults = {
   count: 4,
   result: [
@@ -58,7 +60,7 @@ export const mockStockQuote = {
 };
 
 // https://finnhub.io/docs/api/stock-candles
-export const mockHistoricalData = {
+export const mockHistoricalData: HistoricalData = {
   c: [217.68, 221.03, 219.89],
   h: [222.49, 221.5, 220.94],
   l: [217.19, 217.1402, 218.83],

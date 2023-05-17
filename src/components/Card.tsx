@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 export default function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-full h-full rounded-md relative p-8 bottom-2 bg-gray-300">
+    <div className="relative h-full w-full rounded-md border-2 border-neutral-200 bg-white p-8">
       {children}
     </div>
   );
