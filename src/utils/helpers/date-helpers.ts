@@ -12,7 +12,7 @@ export function createDate(
   days: number,
   weeks: number,
   months: number,
-  years: number
+  years: number,
 ) {
   const newDate = new Date(date);
   newDate.setDate(newDate.getDate() + days);

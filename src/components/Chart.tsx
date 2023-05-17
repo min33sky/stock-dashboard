@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { mockHistoricalData } from '../constants/mock.ts';
-import { convertUnixTimestampToDate } from '../helpers/date-helpers.ts';
+import { convertUnixTimestampToDate } from '../utils/helpers/date-helpers.ts';
 import Card from './Card.tsx';
 import { chartConfig } from '../constants/config.ts';
 import ChartFilter from './ChartFilter.tsx';
