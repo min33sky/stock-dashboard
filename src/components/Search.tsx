@@ -18,7 +18,7 @@ export default function Search() {
     queryFn: () => searchSymbol(input),
     select: (res) => res.data,
     onSuccess: (data) => {
-      console.log("result: ", data);
+      // console.log("result: ", data);
       setBestMatches(data.result);
     },
     onError: (error) => {

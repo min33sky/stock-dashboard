@@ -15,9 +15,6 @@ export default function Dashboard() {
     queryFn: () => fetchStockDetails(stockSymbol),
     select: (res) => res.data,
     enabled: !!stockSymbol,
-    onSuccess: (data) => {
-      console.log("stockDetails: ", data);
-    },
   });
 
   const { data: quote } = useQuery({
@@ -25,9 +22,6 @@ export default function Dashboard() {
     queryFn: () => fetchQuote(stockSymbol),
     select: (res) => res.data,
     enabled: !!stockSymbol,
-    onSuccess: (data) => {
-      console.log("stockQuote: ", data);
-    },
   });
 
   return (

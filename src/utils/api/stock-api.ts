@@ -21,17 +21,17 @@ export function fetchQuote(stockStymbol: string) {
 }
 
 export function fetchHistoricalData({
-  stockStymbol,
+  stockSymbol,
   resolution,
   from,
   to,
 }: {
-  stockStymbol: string;
+  stockSymbol: string;
   resolution: string;
   from: number;
   to: number;
 }) {
   return fetcher.get(
-    `/stock/candle?symbol=${stockStymbol}&resolution=${resolution}&from=${from}&to=${to}`
+    `/stock/candle?symbol=${stockSymbol}&resolution=${resolution}&from=${from}&to=${to}`
   );
 }
