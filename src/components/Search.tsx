@@ -8,12 +8,13 @@ import { Result } from "../types/stock.ts";
 import useDebounce from "../hooks/useDebounce.ts";
 
 export default function Search() {
+  const [isVisible, setIsVisible] = useState(false);
   const [input, setInput] = useState("");
   const debouncedText = useDebounce(input, 500);
   const [bestMatches, setBestMatches] = useState<Result[]>([]);
 
   // TODO:  외부 클릭 시 검색 결과를 닫는 로직 (닫는 로직 개선 필요??)
-  const searchResultRef = useOutsideClick(() => setBestMatches([]));
+  const searchResultRef = useOutsideClick(() => setIsVisible(false));
 
   useQuery({
     queryKey: ["search", debouncedText],
@@ -49,7 +50,10 @@ export default function Search() {
         value={input}
         className="w-full rounded-md px-4 py-2 focus:outline-none dark:bg-gray-900"
         placeholder="Search stock..."
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => {
+          setIsVisible(true);
+          setInput(e.target.value);
+        }}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             updateBestMatches();
@@ -67,8 +71,11 @@ export default function Search() {
       >
         <MagnifyingGlassIcon className="h-4 w-4 fill-gray-100" />
       </button>
-      {input && bestMatches.length > 0 ? (
-        <SearchResults results={bestMatches} />
+      {isVisible && input && bestMatches.length > 0 ? (
+        <SearchResults
+          results={bestMatches}
+          onClose={() => setIsVisible(false)}
+        />
       ) : null}
     </div>
   );

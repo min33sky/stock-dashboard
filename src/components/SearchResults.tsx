@@ -3,9 +3,10 @@ import { useStock } from "../contexts/stockContext.tsx";
 
 interface Props {
   results: Result[];
+  onClose?: () => void;
 }
 
-export default function SearchResults({ results }: Props) {
+export default function SearchResults({ results, onClose }: Props) {
   const { changeStockSymbol } = useStock();
 
   return (
@@ -14,7 +15,10 @@ export default function SearchResults({ results }: Props) {
         <li
           key={item.symbol}
           className="m-2 flex cursor-pointer items-center justify-between rounded-md p-4 transition duration-300 hover:bg-indigo-200 dark:hover:bg-indigo-600"
-          onClick={() => changeStockSymbol(item.symbol)}
+          onClick={() => {
+            changeStockSymbol(item.symbol);
+            onClose?.();
+          }}
         >
           <span>{item.symbol}</span>
           <span>{item.description}</span>
