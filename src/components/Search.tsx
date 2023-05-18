@@ -5,17 +5,19 @@ import useOutsideClick from "../hooks/useOutsideClick";
 import { useQuery } from "@tanstack/react-query";
 import { searchSymbol } from "../utils/api/stock-api.ts";
 import { Result } from "../types/stock.ts";
+import useDebounce from "../hooks/useDebounce.ts";
 
 export default function Search() {
   const [input, setInput] = useState("");
+  const debouncedText = useDebounce(input, 500);
   const [bestMatches, setBestMatches] = useState<Result[]>([]);
 
   // TODO:  외부 클릭 시 검색 결과를 닫는 로직 (닫는 로직 개선 필요??)
   const searchResultRef = useOutsideClick(() => setBestMatches([]));
 
   useQuery({
-    queryKey: ["search", input],
-    queryFn: () => searchSymbol(input),
+    queryKey: ["search", debouncedText],
+    queryFn: () => searchSymbol(debouncedText),
     select: (res) => res.data,
     onSuccess: (data) => {
       // console.log("result: ", data);
@@ -24,7 +26,7 @@ export default function Search() {
     onError: (error) => {
       console.log("error: ", error);
     },
-    enabled: !!input,
+    enabled: !!debouncedText,
   });
 
   const clear = useCallback(() => {
