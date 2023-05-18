@@ -13,7 +13,7 @@ export default function SearchResults({ results }: Props) {
       {results.map((item) => (
         <li
           key={item.symbol}
-          className="m-2 flex cursor-pointer items-center justify-between rounded-md p-4 hover:bg-indigo-200 dark:hover:bg-indigo-600"
+          className="m-2 flex cursor-pointer items-center justify-between rounded-md p-4 transition duration-300 hover:bg-indigo-200 dark:hover:bg-indigo-600"
           onClick={() => changeStockSymbol(item.symbol)}
         >
           <span>{item.symbol}</span>
